@@ -34,13 +34,28 @@ exports.cssLoaders = function (options) {
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
 
     if (loader) {
-      loaders.push({
-        loader: loader + '-loader',
-        options: Object.assign({}, loaderOptions, {
-          sourceMap: options.sourceMap
-        })
-      })
-    }
+      if (loader == 'less') {
+          loaders.push({
+              loader: 'less-loader',
+              options: Object.assign({}, loaderOptions, {
+                  sourceMap: options.sourceMap
+              })
+          }, {
+              loader: 'sass-resources-loader',
+              options: {
+                  // common.less 自己的公共变量路径
+                  resources: [path.resolve(__dirname, '../src/assets/style/common.less')]
+              }
+          });
+      } else {
+          loaders.push({
+              loader: loader + '-loader',
+              options: Object.assign({}, loaderOptions, {
+                  sourceMap: options.sourceMap
+              })
+          })
+      }
+  }
 
     // Extract CSS when that option is specified
     // (which is the case during production build)
