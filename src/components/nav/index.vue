@@ -233,15 +233,6 @@ export default {
 }
 
 // 手机导航
-.zzc {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 1000;
-}
 
 .menu_top {
   position: fixed !important;

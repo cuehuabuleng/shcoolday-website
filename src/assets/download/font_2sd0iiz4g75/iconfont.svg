@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+2013-9-30: Created.
+-->
+<svg>
+<metadata>
+Created by iconfont
+</metadata>
+<defs>
+
+<font id="iconfont" horiz-adv-x="1024" >
+  <font-face
+    font-family="iconfont"
+    font-weight="500"
+    font-stretch="normal"
+    units-per-em="1024"
+    ascent="896"
+    descent="-128"
+  />
+    <missing-glyph />
+    
+    <glyph glyph-name="lianhe11" unicode="&#58986;" d="M0 384a512 512 0 1 0 512-512A512 512 0 0 0 0 384z m64 0A448 448 0 1 1 512 832 448 448 0 0 1 64 384z m317.6448-198.587733a44.049067 44.049067 0 0 0-23.534933 39.355733V543.232a43.9808 43.9808 0 0 0 23.534933 39.355733 46.984533 46.984533 0 0 0 46.984533-0.1536L710.621867 423.253333a44.663467 44.663467 0 0 0 0-78.404266l-281.975467-159.232a47.0528 47.0528 0 0 0-46.984533-0.1536z"  horiz-adv-x="1024" />
+
+    
+
+
+  </font>
+</defs></svg>
