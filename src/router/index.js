@@ -1,13 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Home from '../pages/Home';
-import News from '../pages/News'
-import About from '../pages/About'
 
-
+const Home = resolve => require(['../pages/Home'], resolve)
+const News = resolve => require(['../pages/News'], resolve)
+const About = resolve => require(['../pages/About'], resolve)
+const NotFount = resolve => require(['../pages/notfoned'], resolve)
 // const Home = resolve => require(['../'], resolve)
 Vue.use(Router)
+
+const originalPush = Router.prototype.push
+
+// 解决报错 ： 避免到当前位置的冗余导航。
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 
 export default new Router({
   mode: 'hash',
@@ -26,6 +33,11 @@ export default new Router({
       path: '/about',
       name: 'about',
       component: About
+    },
+    {
+      path: '*',
+      meta: { requireAuth: true },
+      component: NotFount
     }
   ],
   //跳转路由的时候，返回到页面的最顶部最左部

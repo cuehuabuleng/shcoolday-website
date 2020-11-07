@@ -18,7 +18,7 @@
           <div class="message_box">
             <el-carousel direction="vertical" :autoplay="true">
               <el-carousel-item v-for="(item, index) in blessData" :key="index">
-                <li v-for="item in item" :key="item">
+                <li v-for="(item, index) in item" :key="index">
                   <div class="infon">{{ item.name }}</div>
                   <div class="ms">{{ item.ms }}</div>
                 </li>
@@ -27,50 +27,36 @@
           </div>
         </div>
       </div>
-      <div class="want_lytan">
-        <div class="close">x</div>
+      <div :class="[clientW <=768 ? 'want_lytan want_lytan_mobile' : 'want_lytan']" v-if="messageForm">
+        <div class="close" @click="showForm">x</div>
         <div class="my_message">
           <div class="my_message_title">
             <img src="../../../assets/images/icon/con21.png" alt="留言" />
             我要留言
           </div>
           <div class="my_message_form">
-            <form action="" method="post">
-              <table class="winstyle51409" cellspacing="1" cellpadding="1">
-                <tbody>
-                  <tr>
-                    <td>署名</td>
-                    <td><input type="text" name="var1" /></td>
-                  </tr>
-                  <tr>
-                    <td>届数</td>
-                    <td><input type="text" name="var2" /></td>
-                  </tr>
-                  <tr>
-                    <td>院系</td>
-                    <td><input type="text" name="var3" /></td>
-                  </tr>
-                  <tr>
-                    <td>我想对你说</td>
-                    <td><textarea name="var19"></textarea></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2" align="center" class="form_btn">
-                      <input
-                        type="button"
-                        value="提交"
-                        class="buttonstyle51409"
-                      />
-                      <input
-                        type="reset"
-                        value="重置"
-                        class="buttonstyle51409"
-                      />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </form>
+            <div class="info">
+              <div>
+                <span>署名</span>
+                <input type="text" />
+              </div>
+              <div>
+                <span>届数</span>
+                <input type="text" />
+              </div>
+              <div>
+                <span>院系</span>
+                <input type="text" />
+              </div>
+              <div>
+                <span>我想对你说</span>
+                <textarea rows="5" />
+              </div>
+            </div>
+            <div class="submit">
+              <button>提交</button>
+              <button>重置</button>
+            </div>
           </div>
         </div>
       </div>
@@ -92,7 +78,7 @@
         </div>
       </div>
       <div class="clear"></div>
-      <div class="zzc"></div>
+      <div class="zzc" v-if="messageForm" @click="showForm"></div>
     </div>
   </div>
 </template>
@@ -101,6 +87,12 @@
 import Util from "../../../utils";
 export default {
   name: "BlessingSchool",
+  props:{
+    clientW:{
+      type:Number,
+      default:1200
+    }
+  },
   data() {
     return {
       blessData: [
@@ -131,27 +123,14 @@ export default {
           },
         ],
       ],
-      clientW: 1200,
       messageForm: false,
     };
   },
   methods: {
-    setSize: Util.throttle(function () {
-      this.clientW = document.body.clientWidth;
-    }, 200),
-    showForm() {},
-  },
-  mounted() {
-    this.setSize();
-    window.addEventListener("resize", this.setSize);
-  },
-  activated() {
-    this.setSize();
-    window.addEventListener("resize", this.setSize);
-  },
-  deactivated() {
-    window.removeEventListener("resize", this.setSize);
-  },
+    showForm() {
+      this.messageForm = !this.messageForm;
+    },
+  }
 };
 </script>
 <style lang="less" scoped>
@@ -172,6 +151,7 @@ export default {
     margin-bottom: 16px;
     .newzfbtn {
       color: #a41c4c;
+      cursor: pointer;
       img {
         vertical-align: middle;
         width: 32px;
@@ -274,6 +254,7 @@ export default {
   left: 50%;
   margin-left: -290px;
   top: 50%;
+  transform: translateY(-25%);
   background: #f0f0f0;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -293,14 +274,99 @@ export default {
     line-height: 32px;
     text-align: center;
     color: #808080;
-    .my_message {
-      padding: 0rem 0px;
-      .my_message_title {
-        line-height: 32px;
-        color: #a41c4c;
-        margin-bottom: 16px;
+  }
+  .my_message {
+    padding: 0rem 0px;
+    .my_message_title {
+      line-height: 32px;
+      color: #a41c4c;
+      margin-bottom: 16px;
+      img {
+        vertical-align: middle;
+        width: 32px;
+        margin-right: 12px;
+        float: left;
+      }
+    }
+    .my_message_form {
+      width: 100%;
+      .info {
+        div {
+          margin: 10px 0px;
+          span {
+            width: 30%;
+            display: inline-block;
+            text-align: right;
+            padding-right: 35px;
+            box-sizing: border-box;
+            vertical-align: middle;
+          }
+          input {
+            background: none;
+            border: 1px solid #dfdfdf;
+            line-height: 30px;
+            font-size: 0.875rem;
+            width: 60%;
+            padding-left: 1rem;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            -o-box-sizing: border-box;
+            height: 30px;
+            line-height: 30px;
+            color: #000;
+            font-size: 0.875rem;
+          }
+          textarea {
+            vertical-align: middle;
+            width: 60%;
+            height: 100%;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            -o-box-sizing: border-box;
+            padding: 0.5rem 1rem;
+            background: none;
+            color: #000;
+            font-size: 0.875rem;
+          }
+        }
+      }
+      .submit {
+        text-align: center;
+        margin-top: 55px;
+        button {
+          width: 9.125rem;
+          height: 2rem;
+          line-height: 2rem;
+          text-align: center;
+          color: #a41c4c;
+          border: 1px solid #a41c4c;
+          border-radius: 30px;
+          -webkit-border-radius: 30px;
+          -moz-border-radius: 30px;
+          -ms-border-radius: 30px;
+          -o-border-radius: 30px;
+          transition: all 0.5s;
+          -webkit-transition: all 0.5s;
+          -moz-transition: all 0.5s;
+          -ms-transition: all 0.5s;
+          -o-transition: all 0.5s;
+          background: none;
+          outline: none;
+          cursor: pointer;
+        }
       }
     }
   }
+}
+
+// 移动样式
+.want_lytan_mobile {
+  width: 90%;
+  left: 5%;
+  margin-left: 0px;
 }
 </style>

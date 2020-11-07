@@ -1,6 +1,5 @@
 <template>
     <div>
-        历史节点
     </div>
 </template>
 <script>

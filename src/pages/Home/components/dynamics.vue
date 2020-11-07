@@ -93,6 +93,12 @@
 import Util from "../../../utils";
 export default {
   name: "SchoolDynamics",
+    props:{
+    clientW:{
+      type:Number,
+      default:1200
+    }
+  },
   data() {
     return {
       bgcon1: {
@@ -154,7 +160,6 @@ export default {
           time: "202011-24",
         },
       ],
-      clientW: 1200,
       newsCarousel: [
         {
           imgsrc: require("../../../assets/images/topcarousel/car1.jpg"),
@@ -203,22 +208,7 @@ export default {
         }
       }
     },
-    setSize: Util.throttle(function () {
-      this.clientW = document.body.clientWidth;
-    }, 200),
-  },
-  computed: {},
-  mounted() {
-    this.setSize();
-    window.addEventListener("resize", this.setSize);
-  },
-  activated() {
-    this.setSize();
-    window.addEventListener("resize", this.setSize);
-  },
-  deactivated() {
-    window.removeEventListener("resize", this.setSize);
-  },
+  }
 };
 </script>
 <style lang="less" scoped>

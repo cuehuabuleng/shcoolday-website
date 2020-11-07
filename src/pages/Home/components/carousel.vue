@@ -11,6 +11,12 @@
 import Util from "../../../utils";
 export default {
   name: "TopCarousel",
+  props: {
+    clientW: {
+      type: Number,
+      default: 1200,
+    },
+  },
   data() {
     return {
       imgSrc: [
@@ -19,29 +25,12 @@ export default {
         require("../../../assets/images/topcarousel/03.jpg"),
         require("../../../assets/images/topcarousel/04.jpg"),
       ],
-      clientW: 1200,
     };
-  },
-  methods: {
-    setSize: Util.throttle(function () {
-      this.clientW = document.body.clientWidth;
-    }, 200),
   },
   computed: {
     carouselH() {
       return this.clientW / 2.6 + "px";
     },
-  },
-  mounted() {
-    this.setSize();
-    window.addEventListener("resize", this.setSize);
-  },
-  activated() {
-    this.setSize();
-    window.addEventListener("resize", this.setSize);
-  },
-  deactivated() {
-    window.removeEventListener("resize", this.setSize);
   },
 };
 </script>
